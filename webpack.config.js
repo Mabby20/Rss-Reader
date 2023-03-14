@@ -1,19 +1,25 @@
 /* eslint-disable */
-const path = require('path');
-const HTMLWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+import path from 'path';
+import url from 'url';
+
+import HTMLWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+
+const __filename = url.fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 let mode = 'development';
 if (process.env.NODE_ENV === 'production') {
   mode = 'production';
 }
 
-module.exports = {
+export default {
   context: path.resolve(__dirname, 'src'),
   mode: mode,
   entry: {
     main: './js/index.js',
   },
+  devtool: 'source-map',
   output: {
     filename: "[name].[contenthash].js",
     assetModuleFilename: "asset/[hash][ext][query]",
