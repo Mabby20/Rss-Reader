@@ -1,11 +1,34 @@
 import * as yup from 'yup';
 import onChange from 'on-change';
 import view from './view.js';
-// import _ from 'lodash';
-//
-// const routes = {
-//   usersPath: () => '',
-// };
+import Proxy from '../utils/proxy.js';
+import parser from '../utils/parser.js';
+
+const validator = (link, rssLinks) => {
+  const schema = yup.string().url().notOneOf(rssLinks);
+  return schema.validate(link);
+};
+
+const checkCodeResponse = (response, state) => {
+  const code = response.data.status.http_code;
+  if (code >= 400) {
+    const error = new Error('feedback.errors.invalidRss');
+    state.rssLinks.pop();
+    throw error;
+  }
+};
+
+const addId = (obj) => {
+  const cloneObj = _.cloneDeep(obj);
+  const { feed, posts } = cloneObj;
+  feed.id = _.uniqueId();
+  const mainId = feed.id;
+  posts.forEach((post) => {
+    post.feedId = mainId;
+    post.id = _.uniqueId();
+  });
+  return cloneObj;
+};
 
 export default (i18n) => {
   const elements = {
