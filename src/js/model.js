@@ -62,8 +62,20 @@ export default (i18n) => {
       .then(() => {
         state.form.validate = 'valid';
         state.rssLinks.push(inputValue);
-        elements.form.reset();
-        elements.input.focus();
+      })
+      .then(() => {
+        state.form.processState = 'sending';
+        const proxy = new Proxy(inputValue);
+        return axios.get(proxy.getResWithoutHash());
+      })
+      .then((response) => {
+        checkCodeResponse(response, state);
+        const content = response.data.contents;
+        const rawData = parser(content);
+        const data = addId(rawData);
+        state.feedList = [...state.feedList, data.feed];
+        state.postList = [...state.postList, ...data.posts];
+        state.form.processState = 'access';
       })
       .catch((error) => {
         state.form.processState = 'error';
