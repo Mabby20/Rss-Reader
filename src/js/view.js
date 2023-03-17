@@ -111,14 +111,14 @@ const outputError = (elements, error, i18n) => {
 
 export default (elements, initState, i18n) => (path, value) => {
   switch (path) {
-    case 'rssLinks':
-      handleLinks(elements, i18n);
+    case 'form.validate':
+      handleValidate(elements, value);
       break;
-    case 'error':
-      handleErrors(elements, value, i18n);
+    case 'form.processState':
+      handleState(elements, initState, value, i18n);
       break;
-    case '':
-
+    case 'form.errors':
+      outputError(elements, value, i18n);
       break;
     default:
       break;
