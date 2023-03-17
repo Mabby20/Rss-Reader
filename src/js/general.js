@@ -1,27 +1,18 @@
 import i18n from 'i18next';
 import { setLocale } from 'yup';
-import resources from '../locales/index.js';
 import model from './model.js';
+import resources from '../locales/index.js';
 
 export default () => {
   const defaultLng = 'ru';
 
   setLocale({
     mixed: {
-      default: () => ({
-        key: 'default',
-        values: 'feedback.errors.default',
-      }),
-      notOneOf: () => ({
-        key: 'doubleRss',
-        values: 'feedback.errors.doubleRss',
-      }),
+      default: 'feedback.errors.default',
+      notOneOf: 'feedback.errors.doubleRss',
     },
     string: {
-      url: () => ({
-        key: 'invalidUrl',
-        values: 'feedback.errors.invalidUrl',
-      }),
+      url: 'feedback.errors.invalidUrl',
     },
   });
 
