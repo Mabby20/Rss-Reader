@@ -66,7 +66,14 @@ export default (i18n) => {
         elements.input.focus();
       })
       .catch((error) => {
-        state.error = error;
+        state.form.processState = 'error';
+        if (error.name === 'AxiosError') {
+          error.message = 'feedback.errors.network';
+        }
+        if (error.name === 'ValidationError') {
+          state.form.validate = 'invalid';
+        }
+        state.form.errors = error;
       });
   });
 };
