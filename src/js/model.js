@@ -1,5 +1,7 @@
 import * as yup from 'yup';
 import onChange from 'on-change';
+import axios from 'axios';
+import _ from 'lodash';
 import view from './view.js';
 import Proxy from '../utils/proxy.js';
 import parser from '../utils/parser.js';
