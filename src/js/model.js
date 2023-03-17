@@ -58,9 +58,9 @@ export default (i18n) => {
     const formData = new FormData(e.target);
     const inputValue = formData.get('url').trim();
 
-    const schema = yup.string().url().notOneOf(state.rssLinks);
-    schema.validate(inputValue)
+    validator(inputValue, state.rssLinks)
       .then(() => {
+        state.form.validate = 'valid';
         state.rssLinks.push(inputValue);
         elements.form.reset();
         elements.input.focus();
