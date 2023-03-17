@@ -63,10 +63,50 @@ const outputContent = (elements, state) => {
 
 const outputSuccess = (elements, i18n) => {
   elements.input.classList.remove('is-invalid');
-
   elements.status.classList.remove('text-danger');
   elements.status.classList.add('text-success');
   elements.status.textContent = i18n.t('feedback.access');
+};
+
+const handleState = (elements, initState, curValue, i18n) => {
+  switch (curValue) {
+    case 'filling':
+
+      break;
+    case 'sending':
+      elements.submitButton.disabled = true;
+      break;
+    case 'access':
+      elements.submitButton.disabled = false;
+      elements.form.reset();
+      elements.input.focus();
+      outputSuccess(elements, i18n);
+      outputContent(elements, initState);
+      break;
+    case 'error':
+      elements.submitButton.disabled = false;
+      elements.status.classList.add('text-danger');
+      elements.status.classList.remove('text-success');
+      break;
+
+    default:
+      break;
+  }
+};
+
+const handleValidate = (elements, valid) => {
+  if (valid === 'valid') {
+    elements.input.classList.remove('is-invalid');
+    return;
+  }
+  if (valid === 'invalid') {
+    elements.input.classList.add('is-invalid');
+  }
+};
+
+const outputError = (elements, error, i18n) => {
+  const { message } = error;
+  elements.status.textContent = i18n.t(message);
 };
 
 export default (elements, initState, i18n) => (path, value) => {
