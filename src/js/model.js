@@ -41,11 +41,13 @@ export default (i18n) => {
   };
   const initState = {
     form: {
-      // url: null,
-      validate: true,
+      processState: 'filling', // filling, sending, success, error
+      errors: {},
+      validate: 'valid', // valid, invalid
     },
-    error: {},
     rssLinks: [],
+    feedList: [],
+    postList: [],
   };
 
   const state = onChange(initState, view(elements, initState, i18n));
