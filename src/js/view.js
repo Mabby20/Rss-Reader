@@ -1,5 +1,5 @@
 const buildFeed = (state) => {
-  const { feedList } = state;
+  const { feedList } = state.data;
 
   const card = document.createElement('div');
   const cardBody = document.createElement('div');
@@ -23,7 +23,7 @@ const buildFeed = (state) => {
 };
 
 const buildPost = (state) => {
-  const { postList } = state;
+  const { postList } = state.data;
 
   const card = document.createElement('div');
   const cardBody = document.createElement('div');
@@ -38,14 +38,16 @@ const buildPost = (state) => {
       title, id, url, // description, feedId
     } = post;
 
-    return `
+    const item = `
         <li class="list-group-item d-flex justify-content-between align-items-start border-0 border-end-0">
             <a href=${url} class="fw-bold"
                 data-id=${id} target="_blank" rel="noopener noreferrer">${title}</a>
             <button type="button" class="btn btn-outline-primary btn-sm" data-id=${id} data-bs-toggle="modal"
                     data-bs-target="#modal">Просмотр</button>
         </li>`;
+    return item;
   }).join('\n');
+
   listGroup.outerHTML = `<ul class="list-group border-0 rounded-0">${elements}</ul>`;
   return card;
 };
@@ -71,7 +73,6 @@ const outputSuccess = (elements, i18n) => {
 const handleState = (elements, initState, curValue, i18n) => {
   switch (curValue) {
     case 'filling':
-
       break;
     case 'sending':
       elements.submitButton.disabled = true;
