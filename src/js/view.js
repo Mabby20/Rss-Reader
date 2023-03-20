@@ -67,7 +67,7 @@ const outputSuccess = (elements, i18n) => {
   elements.input.classList.remove('is-invalid');
   elements.status.classList.remove('text-danger');
   elements.status.classList.add('text-success');
-  elements.status.textContent = i18n.t('feedback.access');
+  elements.status.textContent = i18n.t('feedback.success');
 };
 
 const handleState = (elements, initState, curValue, i18n) => {
@@ -77,7 +77,7 @@ const handleState = (elements, initState, curValue, i18n) => {
     case 'sending':
       elements.submitButton.disabled = true;
       break;
-    case 'access':
+    case 'success':
       elements.submitButton.disabled = false;
       elements.form.reset();
       elements.input.focus();
