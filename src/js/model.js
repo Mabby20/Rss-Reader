@@ -55,11 +55,22 @@ export default (i18n) => {
       .then((response) => {
         checkCodeResponse(response, state);
         const content = response.data.contents;
-        const rawData = parser(content);
-        const data = addId(rawData);
-        state.feedList = [...state.feedList, data.feed];
-        state.postList = [...state.postList, ...data.posts];
-        state.form.processState = 'access';
+        const { feed, posts } = parser(content);
+
+        state.rssLinks.push(inputUrl);
+        feed.rssLink = inputUrl;
+        feed.id = _.uniqueId();
+        const mainId = feed.id;
+        generateId(mainId, posts);
+
+        state.data.feedList = [...state.data.feedList, feed];
+        state.data.postList = [...state.data.postList, ...posts];
+
+        state.form.processState = 'success';
+        state.form.processState = 'filling';
+      })
+      .then(() => {
+        setTimeout(() => updateRss(state), 5000);
       })
       .catch((error) => {
         state.form.processState = 'error';
