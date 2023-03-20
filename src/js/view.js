@@ -22,7 +22,7 @@ const buildFeed = (state) => {
   return card;
 };
 
-const buildPost = (state) => {
+const buildPost = (state, i18n) => {
   const { postList } = state.data;
 
   const cardEl = document.createElement('div');
@@ -58,9 +58,9 @@ const outputFeed = (elements, state) => {
   elements.outputFeed.append(feedList);
 };
 
-const outputPost = (elements, state) => {
+const outputPost = (elements, state, i18n) => {
   elements.outputPost.innerHTML = '';
-  const postList = buildPost(state);
+  const postList = buildPost(state, i18n);
   elements.outputPost.append(postList);
 };
 
@@ -84,7 +84,7 @@ const handleState = (elements, initState, curValue, i18n) => {
       elements.input.focus();
       outputSuccess(elements, i18n);
       outputFeed(elements, initState);
-      outputPost(elements, initState);
+      outputPost(elements, initState, i18n);
       break;
     case 'error':
       elements.submitButton.disabled = false;
@@ -92,7 +92,7 @@ const handleState = (elements, initState, curValue, i18n) => {
       elements.status.classList.remove('text-success');
       break;
     case 'spying':
-      outputPost(elements, initState);
+      outputPost(elements, initState, i18n);
       break;
 
     default:
