@@ -3,8 +3,10 @@ import onChange from 'on-change';
 import axios from 'axios';
 import _ from 'lodash';
 import view from './view.js';
-import Proxy from '../utils/proxy.js';
 import parser from '../utils/parser.js';
+import generateId from '../utils/genId.js';
+import updateRss from '../utils/updater.js';
+import getProxy from '../utils/getProxy.js';
 
 const validator = (link, rssLinks) => {
   const schema = yup.string().url().notOneOf(rssLinks);
