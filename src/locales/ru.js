@@ -8,8 +8,10 @@ export default {
         doubleRss: 'RSS уже существует',
         invalidUrl: 'Ссылка должна быть валидным URL',
         invalidRss: 'Ресурс не содержит валидный RSS',
-        emptyInput: 'Не должно быть пустым',
       },
+    },
+    buttons: {
+      postBtn: 'Просмотр',
     },
   },
 };
