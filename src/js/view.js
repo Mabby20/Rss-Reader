@@ -68,6 +68,11 @@ const outputSuccess = (elements, i18n) => {
   elements.status.textContent = i18n.t('feedback.success');
 };
 
+const outputError = (elements, error, i18n) => {
+  const { message } = error;
+  elements.status.textContent = i18n.t(message);
+};
+
 const handleState = (elements, initState, curValue, i18n) => {
   switch (curValue) {
     case 'filling':
