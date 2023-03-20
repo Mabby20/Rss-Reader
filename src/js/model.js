@@ -13,27 +13,6 @@ const validator = (link, rssLinks) => {
   return schema.validate(link);
 };
 
-const checkCodeResponse = (response, state) => {
-  const code = response.data.status.http_code;
-  if (code >= 400) {
-    const error = new Error('feedback.errors.invalidRss');
-    state.rssLinks.pop();
-    throw error;
-  }
-};
-
-const addId = (obj) => {
-  const cloneObj = _.cloneDeep(obj);
-  const { feed, posts } = cloneObj;
-  feed.id = _.uniqueId();
-  const mainId = feed.id;
-  posts.forEach((post) => {
-    post.feedId = mainId;
-    post.id = _.uniqueId();
-  });
-  return cloneObj;
-};
-
 export default (i18n) => {
   const elements = {
     form: document.querySelector('.rss-form'),
