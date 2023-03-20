@@ -1,7 +1,7 @@
 export default {
   translation: {
     feedback: {
-      access: 'RSS успешно загружен',
+      success: 'RSS успешно загружен',
       errors: {
         default: 'Данные неверные',
         network: 'Ошибка сети',
