@@ -19,6 +19,7 @@ export default (i18n) => {
     input: document.querySelector('.form-control'),
     submitButton: document.querySelector('button[type="submit"]'),
     status: document.querySelector('.feedback'),
+    outputFeed: document.querySelector('.feeds'),
     outputPost: document.querySelector('.posts'),
     postButtons: document.querySelectorAll('button[data-bs-target="#modal"]'),
     modal: {
