@@ -91,6 +91,9 @@ const handleState = (elements, initState, curValue, i18n) => {
       elements.status.classList.add('text-danger');
       elements.status.classList.remove('text-success');
       break;
+    case 'spying':
+      outputPost(elements, initState);
+      break;
 
     default:
       break;
