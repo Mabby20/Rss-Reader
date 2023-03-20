@@ -28,9 +28,11 @@ export default (i18n) => {
       errors: {},
       validate: 'valid', // valid, invalid
     },
+    data: {
+      feedList: [],
+      postList: [],
+    },
     rssLinks: [],
-    feedList: [],
-    postList: [],
   };
 
   const state = onChange(initState, view(elements, initState, i18n));
