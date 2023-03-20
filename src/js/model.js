@@ -20,7 +20,12 @@ export default (i18n) => {
     submitButton: document.querySelector('button[type="submit"]'),
     status: document.querySelector('.feedback'),
     outputPost: document.querySelector('.posts'),
-    outputFeed: document.querySelector('.feeds'),
+    postButtons: document.querySelectorAll('button[data-bs-target="#modal"]'),
+    modal: {
+      title: document.querySelector('.modal-title'),
+      body: document.querySelector('.modal-body'),
+      link: document.querySelector('.modal-footer > .btn-primary'),
+    },
   };
   const initState = {
     form: {
@@ -31,6 +36,10 @@ export default (i18n) => {
     data: {
       feedList: [],
       postList: [],
+    },
+    uiState: {
+      modal: {},
+      visitedPostId: new Set(),
     },
     rssLinks: [],
   };
@@ -73,13 +82,30 @@ export default (i18n) => {
       })
       .catch((error) => {
         state.form.processState = 'error';
-        if (error.name === 'AxiosError') {
-          error.message = 'feedback.errors.network';
+        switch (error.name) {
+          case 'AxiosError':
+            error.message = 'feedback.errors.network';
+            state.form.errors = error;
+            break;
+          case 'ValidationError':
+            state.form.validate = 'invalid';
+            state.form.errors = error;
+            break;
+          case 'Error':
+            error.message = error.message === 'Error parser' ? 'feedback.errors.invalidRss' : 'Error parser';
+            state.form.errors = error;
+            break;
+          default:
+            console.error(error.message);// eslint-disable-line no-console
         }
-        if (error.name === 'ValidationError') {
-          state.form.validate = 'invalid';
-        }
-        state.form.errors = error;
       });
+  });
+
+  elements.outputPost.addEventListener('click', (e) => {
+    const { id } = e.target.dataset;
+    if (id !== undefined) {
+      state.uiState.modal = state.data.postList.find((post) => post.id === id);
+      state.uiState.visitedPostId.add(id);
+    }
   });
 };
