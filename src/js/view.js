@@ -133,6 +133,16 @@ export default (elements, initState, i18n) => (path, value) => {
     case 'form.errors':
       outputError(elements, value, i18n);
       break;
+    case 'uiState.modal':
+      handleModal(initState, elements);
+      break;
+    case 'uiState.visitedPostId':
+      initState.uiState.visitedPostId.forEach((id) => {
+        const link = elements.outputPost.querySelector(`a[data-id="${id}"]`);
+        link.classList.remove('fw-bold');
+        link.classList.add('fw-normal', 'link-secondary');
+      });
+      break;
     default:
       break;
   }
