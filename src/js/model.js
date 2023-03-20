@@ -49,8 +49,8 @@ export default (i18n) => {
       })
       .then(() => {
         state.form.processState = 'sending';
-        const proxy = new Proxy(inputValue);
-        return axios.get(proxy.getResWithoutHash());
+        const proxyRss = getProxy(inputUrl);
+        return axios.get(proxyRss);
       })
       .then((response) => {
         checkCodeResponse(response, state);
