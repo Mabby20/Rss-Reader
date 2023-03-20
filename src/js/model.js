@@ -46,7 +46,6 @@ export default (i18n) => {
     validator(inputUrl, state.rssLinks)
       .then(() => {
         state.form.validate = 'valid';
-        state.rssLinks.push(inputValue);
       })
       .then(() => {
         state.form.processState = 'sending';
