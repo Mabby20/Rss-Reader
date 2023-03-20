@@ -52,14 +52,15 @@ const buildPost = (state) => {
   return card;
 };
 
-const outputContent = (elements, state) => {
+const outputFeed = (elements, state) => {
   elements.outputFeed.innerHTML = '';
-  elements.outputPost.innerHTML = '';
-
   const feedList = buildFeed(state);
-  const postList = buildPost(state);
-
   elements.outputFeed.append(feedList);
+};
+
+const outputPost = (elements, state) => {
+  elements.outputPost.innerHTML = '';
+  const postList = buildPost(state);
   elements.outputPost.append(postList);
 };
 
@@ -82,7 +83,8 @@ const handleState = (elements, initState, curValue, i18n) => {
       elements.form.reset();
       elements.input.focus();
       outputSuccess(elements, i18n);
-      outputContent(elements, initState);
+      outputFeed(elements, initState);
+      outputPost(elements, initState);
       break;
     case 'error':
       elements.submitButton.disabled = false;
