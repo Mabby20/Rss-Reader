@@ -41,9 +41,9 @@ export default (i18n) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
-    const inputValue = formData.get('url').trim();
+    const inputUrl = formData.get('url').trim();
 
-    validator(inputValue, state.rssLinks)
+    validator(inputUrl, state.rssLinks)
       .then(() => {
         state.form.validate = 'valid';
         state.rssLinks.push(inputValue);
