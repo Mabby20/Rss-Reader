@@ -110,9 +110,14 @@ const handleValidate = (elements, valid) => {
   }
 };
 
-const outputError = (elements, error, i18n) => {
-  const { message } = error;
-  elements.status.textContent = i18n.t(message);
+const handleModal = (state, elements) => {
+  const titleContent = state.uiState.modal.title;
+  const descriptionContent = state.uiState.modal.description;
+  const { link } = state.uiState.modal;
+
+  elements.modal.title.textContent = titleContent;
+  elements.modal.body.textContent = descriptionContent;
+  elements.modal.link.setAttribute('href', link);
 };
 
 export default (elements, initState, i18n) => (path, value) => {
