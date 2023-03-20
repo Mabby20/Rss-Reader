@@ -53,7 +53,6 @@ export default (i18n) => {
         return axios.get(proxyRss);
       })
       .then((response) => {
-        checkCodeResponse(response, state);
         const content = response.data.contents;
         const { feed, posts } = parser(content);
 
