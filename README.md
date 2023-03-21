@@ -4,7 +4,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/d4d0d546b9ec61511a4a/maintainability)](https://codeclimate.com/github/Mabby20/frontend-project-11/maintainability)
 [![Actions Status](https://github.com/Mabby20/frontend-project-11/workflows/hexlet-check/badge.svg)](https://github.com/Mabby20/frontend-project-11/actions)
 
-![img.png](img.png)
+![img.png](src/assets/img.png)
 ## Rss Reader
 
 **Rss Reader** is a service for aggregating RSS feed that allows convenient reading of various sources such as blog and news
