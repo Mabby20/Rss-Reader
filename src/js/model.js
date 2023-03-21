@@ -3,7 +3,7 @@ import onChange from 'on-change';
 import axios from 'axios';
 import _ from 'lodash';
 import render from './view.js';
-import parser from '../utils/parser.js';
+import parse from '../utils/parser.js';
 import generateId from '../utils/genId.js';
 import updateRss from '../utils/updater.js';
 import getProxy from '../utils/getProxy.js';
@@ -64,7 +64,7 @@ export default (i18n) => {
       })
       .then((response) => {
         const content = response.data.contents;
-        const { feed, posts } = parser(content);
+        const { feed, posts } = parse(content);
 
         state.rssLinks.push(inputUrl);
         feed.rssLink = inputUrl;
