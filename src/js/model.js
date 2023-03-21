@@ -4,7 +4,7 @@ import axios from 'axios';
 import _ from 'lodash';
 import render from './view.js';
 import parse from '../utils/parser.js';
-import generateId from '../utils/genId.js';
+import assignUniqueId from '../utils/genId.js';
 import updateRss from '../utils/updater.js';
 import getProxy from '../utils/getProxy.js';
 
@@ -70,7 +70,7 @@ export default (i18n) => {
         feed.rssLink = inputUrl;
         feed.id = _.uniqueId();
         const mainId = feed.id;
-        generateId(mainId, posts);
+        assignUniqueId(mainId, posts);
 
         state.data.feedList = [...state.data.feedList, feed];
         state.data.postList = [...state.data.postList, ...posts];

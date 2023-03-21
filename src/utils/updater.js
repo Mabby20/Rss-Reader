@@ -1,5 +1,5 @@
 import axios from 'axios';
-import generateId from './genId.js';
+import assignUniqueId from './genId.js';
 import parse from './parser.js';
 import getProxy from './getProxy.js';
 
@@ -21,7 +21,7 @@ const updaterRss = (state, timeout = 5000) => {
           return [];
         }
 
-        generateId(mainId, newPosts);
+        assignUniqueId(mainId, newPosts);
         return newPosts;
       });
   });
