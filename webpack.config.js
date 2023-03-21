@@ -8,10 +8,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-let mode = 'development';
-if (process.env.NODE_ENV === 'production') {
-  mode = 'production';
-}
+const mode = process.env.NODE_ENV === 'production' ? 'production' : 'development';
 
 export default {
   context: path.resolve(__dirname, 'src'),
