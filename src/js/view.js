@@ -1,5 +1,4 @@
-const buildFeed = (state) => {
-  const { feedList } = state.data;
+const buildFeed = (feedList) => {
 
   const card = document.createElement('div');
   const cardBody = document.createElement('div');
@@ -22,8 +21,7 @@ const buildFeed = (state) => {
   return card;
 };
 
-const buildPost = (state, i18n) => {
-  const { postList } = state.data;
+const buildPost = (postList, visitedPostId, i18n) => {
 
   const cardEl = document.createElement('div');
   const cardBodyEl = document.createElement('div');
@@ -37,7 +35,7 @@ const buildPost = (state, i18n) => {
     const {
       title, id, link,
     } = post;
-    const style = state.uiState.visitedPostId.has(id) ? 'fw-normal link-secondary' : 'fw-bold';
+    const style = visitedPostId.has(id) ? 'fw-normal link-secondary' : 'fw-bold';
     return `
         <li class="list-group-item d-flex justify-content-between align-items-start border-0 border-end-0">
             <a href="${link}" class="${style}" data-id="${id}" target="_blank" rel="noopener noreferrer">${title}</a>
@@ -51,14 +49,17 @@ const buildPost = (state, i18n) => {
 
 const outputFeed = (elements, state) => {
   elements.outputFeed.innerHTML = '';
-  const feedList = buildFeed(state);
-  elements.outputFeed.append(feedList);
+  const { feedList } = state.data;
+  const containerWithFeeds = buildFeed(feedList);
+  elements.outputFeed.append(containerWithFeeds);
 };
 
 const outputPost = (elements, state, i18n) => {
   elements.outputPost.innerHTML = '';
-  const postList = buildPost(state, i18n);
-  elements.outputPost.append(postList);
+  const { postList } = state.data;
+  const { visitedPostId } = state.uiState
+  const containerWithPosts = buildPost(postList, visitedPostId, i18n);
+  elements.outputPost.append(containerWithPosts);
 };
 
 const outputSuccess = (elements, i18n) => {
