@@ -2,7 +2,7 @@ import * as yup from 'yup';
 import onChange from 'on-change';
 import axios from 'axios';
 import _ from 'lodash';
-import view from './view.js';
+import render from './view.js';
 import parser from '../utils/parser.js';
 import generateId from '../utils/genId.js';
 import updateRss from '../utils/updater.js';
@@ -45,7 +45,7 @@ export default (i18n) => {
     rssLinks: [],
   };
 
-  const state = onChange(initState, view(elements, initState, i18n));
+  const state = onChange(initState, render(elements, initState, i18n));
 
   elements.form.addEventListener('submit', (e) => {
     e.preventDefault();
