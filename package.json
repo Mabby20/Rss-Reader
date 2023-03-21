@@ -22,10 +22,6 @@
   },
   "homepage": "https://github.com/Mabby20/frontend-project-11#readme",
   "devDependencies": {
-    "@babel/core": "^7.21.0",
-    "@babel/eslint-parser": "^7.19.1",
-    "@babel/preset-env": "^7.20.2",
-    "babel-loader": "^9.1.2",
     "css-loader": "^6.7.3",
     "eslint": "^8.35.0",
     "eslint-config-airbnb-base": "^15.0.0",
