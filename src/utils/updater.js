@@ -1,6 +1,6 @@
 import axios from 'axios';
 import generateId from './genId.js';
-import parser from './parser.js';
+import parse from './parser.js';
 import getProxy from './getProxy.js';
 
 const updaterRss = (state, timeout = 5000) => {
@@ -11,7 +11,7 @@ const updaterRss = (state, timeout = 5000) => {
     return axios.get(proxyRss)
       .then((response) => {
         const content = response.data.contents;
-        const { posts: uploadedPosts } = parser(content);
+        const { posts: uploadedPosts } = parse(content);
         const loadedPosts = state.data.postList.filter((post) => post.feedId === mainId);
         const loadedPostsLinks = loadedPosts.map((post) => post.link);
         const coll = new Set(loadedPostsLinks);
