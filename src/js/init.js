@@ -1,6 +1,6 @@
 import i18n from 'i18next';
 import { setLocale } from 'yup';
-import model from './model.js';
+import runApp from './model.js';
 import resources from '../locales/index.js';
 
 export default () => {
@@ -22,5 +22,5 @@ export default () => {
     lng: defaultLng,
     debug: true,
     resources,
-  }).then(() => model(i18nInstance));
+  }).then(() => runApp(i18nInstance));
 };
