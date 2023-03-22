@@ -46,7 +46,9 @@ export default (i18n) => {
   };
 
   const state = onChange(initState, render(elements, initState, i18n));
-
+  
+  setTimeout(() => updateRss(state), 5000);
+  
   elements.form.addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -76,11 +78,8 @@ export default (i18n) => {
         state.data.postList = [...state.data.postList, ...posts];
 
         state.form.processState = 'success';
-        state.form.processState = 'filling';
       })
-      .then(() => {
-        setTimeout(() => updateRss(state), 5000);
-      })
+
       .catch((error) => {
         state.form.processState = 'error';
         switch (error.name) {
