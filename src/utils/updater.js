@@ -4,6 +4,9 @@ import parse from './parser.js';
 import getProxy from './getProxy.js';
 
 const updaterRss = (state, timeout = 5000) => {
+  if (state.rssLinks.length === 0) {
+    return;
+  }
   const promises = state.rssLinks.map((link) => {
     const curFeed = state.data.feedList.find((feed) => feed.rssLink === link);
     const mainId = curFeed.id;
@@ -27,15 +30,19 @@ const updaterRss = (state, timeout = 5000) => {
   });
 
   return Promise
-    .all(promises)
-    .then((res) => {
-      const flatRes = res.flatMap((post) => post);
-      state.data.postList = [...flatRes, ...state.data.postList];
-      state.form.processState = 'spying';
+    .allSettled(promises)
+    .then((results) => {
+      const rejectedPost = results.filter(({ status}) => status === 'rejected');
+      rejectedPost.forEach((error) => {
+          const curError = error.reason;
+          console.error('Error', curError)// eslint-disable-line no-console
+        });
+      const posts = results
+        .filter(({ status }) => status === 'fulfilled')
+        .flatMap((post) => post.value);
+      state.data.postList = [...posts, ...state.data.postList];
     })
-    .catch(console.error)// eslint-disable-line no-console
     .finally(() => {
-      state.form.processState = 'filling';
       setTimeout(() => updaterRss(state), timeout);
     });
 };
