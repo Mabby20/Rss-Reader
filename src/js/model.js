@@ -46,9 +46,9 @@ export default (i18n) => {
   };
 
   const state = onChange(initState, render(elements, initState, i18n));
-  
+
   setTimeout(() => updateRss(state), 5000);
-  
+
   elements.form.addEventListener('submit', (e) => {
     e.preventDefault();
 

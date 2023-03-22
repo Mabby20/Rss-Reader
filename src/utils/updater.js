@@ -29,14 +29,14 @@ const updaterRss = (state, timeout = 5000) => {
       });
   });
 
-  return Promise
+  Promise
     .allSettled(promises)
     .then((results) => {
-      const rejectedPost = results.filter(({ status}) => status === 'rejected');
+      const rejectedPost = results.filter(({ status }) => status === 'rejected');
       rejectedPost.forEach((error) => {
-          const curError = error.reason;
-          console.error('Error', curError)// eslint-disable-line no-console
-        });
+        const curError = error.reason;
+        console.error('Error', curError);// eslint-disable-line no-console
+      });
       const posts = results
         .filter(({ status }) => status === 'fulfilled')
         .flatMap((post) => post.value);

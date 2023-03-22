@@ -1,5 +1,4 @@
 const buildFeed = (feedList) => {
-
   const card = document.createElement('div');
   const cardBody = document.createElement('div');
   const listGroup = document.createElement('ul');
@@ -22,7 +21,6 @@ const buildFeed = (feedList) => {
 };
 
 const buildPost = (postList, visitedPostId, i18n) => {
-
   const cardEl = document.createElement('div');
   const cardBodyEl = document.createElement('div');
   const listGroupEl = document.createElement('ul');
@@ -57,7 +55,7 @@ const outputFeed = (elements, state) => {
 const outputPost = (elements, state, i18n) => {
   elements.outputPost.innerHTML = '';
   const { postList } = state.data;
-  const { visitedPostId } = state.uiState
+  const { visitedPostId } = state.uiState;
   const containerWithPosts = buildPost(postList, visitedPostId, i18n);
   elements.outputPost.append(containerWithPosts);
 };
