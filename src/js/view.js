@@ -131,6 +131,12 @@ export default (elements, initState, i18n) => (path, value) => {
     case 'form.processState':
       handleState(elements, initState, value, i18n);
       break;
+    case 'data.feedList':
+      outputFeed(elements, initState);
+      break;
+    case 'data.postList':
+      outputPost(elements, initState, i18n);
+      break;
     case 'form.errors':
       outputError(elements, value, i18n);
       break;
