@@ -76,8 +76,6 @@ const outputError = (elements, error, i18n) => {
 
 const handleState = (elements, initState, curValue, i18n) => {
   switch (curValue) {
-    case 'filling':
-      break;
     case 'sending':
       elements.submitButton.disabled = true;
       break;
@@ -86,18 +84,12 @@ const handleState = (elements, initState, curValue, i18n) => {
       elements.form.reset();
       elements.input.focus();
       outputSuccess(elements, i18n);
-      outputFeed(elements, initState);
-      outputPost(elements, initState, i18n);
       break;
     case 'error':
       elements.submitButton.disabled = false;
       elements.status.classList.add('text-danger');
       elements.status.classList.remove('text-success');
       break;
-    case 'spying':
-      outputPost(elements, initState, i18n);
-      break;
-
     default:
       break;
   }
