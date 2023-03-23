@@ -8,7 +8,7 @@ import assignUniqueId from '../utils/genId.js';
 import updateRss from '../utils/updater.js';
 import getProxy from '../utils/getProxy.js';
 
-const validator = (link, rssLinks) => {
+const validateLink = (link, rssLinks) => {
   const schema = yup.string().url().notOneOf(rssLinks);
   return schema.validate(link);
 };
@@ -55,7 +55,7 @@ export default (i18n) => {
     const formData = new FormData(e.target);
     const inputUrl = formData.get('url').trim();
 
-    validator(inputUrl, state.rssLinks)
+    validateLink(inputUrl, state.rssLinks)
       .then(() => {
         state.form.validate = 'valid';
       })
@@ -71,8 +71,7 @@ export default (i18n) => {
         state.rssLinks.push(inputUrl);
         feed.rssLink = inputUrl;
         feed.id = _.uniqueId();
-        const mainId = feed.id;
-        assignUniqueId(mainId, posts);
+        assignUniqueId(feed.id, posts);
 
         state.data.feedList = [...state.data.feedList, feed];
         state.data.postList = [...state.data.postList, ...posts];
@@ -85,19 +84,17 @@ export default (i18n) => {
         switch (error.name) {
           case 'AxiosError':
             error.message = 'feedback.errors.network';
-            state.form.errors = error;
             break;
           case 'ValidationError':
             state.form.validate = 'invalid';
-            state.form.errors = error;
             break;
           case 'Error':
             error.message = error.message === 'Error parser' ? 'feedback.errors.invalidRss' : 'Error parser';
-            state.form.errors = error;
             break;
           default:
             console.error(error.message);// eslint-disable-line no-console
         }
+        state.form.errors = error;
       });
   });
 
